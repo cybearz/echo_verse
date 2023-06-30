@@ -1,15 +1,36 @@
 import { createRouter, createWebHistory } from "vue-router"
-import MainLayout from "@/layouts/MainLayout"
+import LayoutMain from "@/layouts/LayoutMain.vue"
 
 const routes = [
 	{
 		path: "/",
-		component: MainLayout,
+		component: LayoutMain,
 		children: [
 			{
 				path: "",
 				name: "PageMain",
 				component: () => import("@/pages/PageMain"),
+			},
+		],
+	},
+	{
+		path: "/auth",
+		component: () => import("@/layouts/LayoutAuth"),
+		meta: { authRequired: false },
+		children: [
+			{
+				path: "",
+				redirect: "/auth/login",
+			},
+			{
+				path: "login",
+				name: "PageLogin",
+				component: () => import("@/pages/PageLogin"),
+			},
+			{
+				path: "signup",
+				name: "PageSignup",
+				component: () => import("@/pages/PageSignUp"),
 			},
 		],
 	},

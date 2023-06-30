@@ -1,9 +1,11 @@
 <script setup lang="ts">
+
 </script>
 
 <template>
-	<v-app>
-		<router-view/>
-	</v-app>
-</template>
+	<v-app-bar title="EchoVerse"/>
 
+	<v-main>
+		<router-view/>
+	</v-main>
+</template>

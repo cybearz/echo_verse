@@ -1,6 +1,7 @@
-<template>
-	<HelloWorld/>
-</template>
+<script setup lang="ts">
 
-<script lang="ts" setup>
-import HelloWorld from "@/components/HelloWorld.vue"</script>
+</script>
+
+<template>
+22
+</template>
