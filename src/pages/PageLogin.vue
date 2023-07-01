@@ -2,14 +2,21 @@
 
 import { ref } from "vue"
 import { useRouter } from "vue-router"
+import { useLogin } from "@/composables/useLogin"
 
 const email = ref("")
 const password = ref("")
 
 const router = useRouter()
-const onSubmit = () => {
-	console.log("Submit: ", email.value, password.value)
-	router.push({ name: "PageMain" })
+const { login, error } = useLogin()
+
+const onSubmit = async () => {
+	await login(email.value, password.value)
+	if (error.value) {
+		console.log(error.value)
+	} else {
+		router.push({ name: "PageMain" })
+	}
 }
 </script>
 
@@ -28,6 +35,7 @@ const onSubmit = () => {
 
 					<v-text-field
 						v-model="password"
+						type="password"
 						label="Пароль"
 						variant="underlined"
 						class="mb-2"

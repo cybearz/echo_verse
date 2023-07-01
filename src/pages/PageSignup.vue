@@ -1,15 +1,23 @@
 <script setup lang="ts">
-
 import { ref } from "vue"
 import { useRouter } from "vue-router"
+import { useSignup } from "@/composables/useSignup"
 
+const displayName = ref("")
 const email = ref("")
 const password = ref("")
 
 const router = useRouter()
-const onSubmit = () => {
-	console.log("Submit: ", email.value, password.value)
-	router.push({ name: "PageMain" })
+const { signup, error } = useSignup()
+
+const onSubmit = async () => {
+	console.log(displayName.value)
+	await signup(email.value, password.value, displayName.value)
+	if (error.value) {
+		console.log(error.value)
+	} else {
+		router.push({ name: "PageMain" })
+	}
 }
 </script>
 
@@ -20,6 +28,13 @@ const onSubmit = () => {
 			<v-card-text>
 				<v-form @submit.prevent="onSubmit">
 					<v-text-field
+						v-model="displayName"
+						label="Имя"
+						variant="underlined"
+						class="mb-2"
+					/>
+
+					<v-text-field
 						v-model="email"
 						label="Email"
 						variant="underlined"
@@ -28,6 +43,7 @@ const onSubmit = () => {
 
 					<v-text-field
 						v-model="password"
+						type="password"
 						label="Пароль"
 						variant="underlined"
 						class="mb-2"

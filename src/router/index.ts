@@ -30,7 +30,7 @@ const routes = [
 			{
 				path: "signup",
 				name: "PageSignup",
-				component: () => import("@/pages/PageSignUp"),
+				component: () => import("@/pages/PageSignup"),
 			},
 		],
 	},
