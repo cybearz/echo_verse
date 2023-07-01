@@ -1,10 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router"
 import LayoutMain from "@/layouts/LayoutMain.vue"
+import { useAuth } from "@/composables/useAuth"
 
 const routes = [
 	{
 		path: "/",
 		component: LayoutMain,
+		meta: { authRequired: true },
 		children: [
 			{
 				path: "",
@@ -39,6 +41,14 @@ const routes = [
 const router = createRouter({
 	history: createWebHistory(process.env.BASE_URL),
 	routes,
+})
+
+const { isAuthenticated } = useAuth()
+router.beforeEach((to) => {
+	if (to.meta.authRequired && !isAuthenticated.value) {
+		return { name: "PageLogin" }
+	}
+	return true
 })
 
 export default router

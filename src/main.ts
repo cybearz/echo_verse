@@ -1,14 +1,13 @@
-// Components
+import { createApp } from "vue"
+import { auth } from "@/firebase/config"
+import { registerPlugins } from "@/plugins"
 import App from "./App.vue"
 
-// Composables
-import { createApp } from "vue"
+let app
 
-// Plugins
-import { registerPlugins } from "@/plugins"
-
-const app = createApp(App)
-
-registerPlugins(app)
-
-app.mount("#app")
+auth.onAuthStateChanged(() => {
+	if (app) return //^
+	app = createApp(App)
+	registerPlugins(app)
+	app.mount("#app")
+})
