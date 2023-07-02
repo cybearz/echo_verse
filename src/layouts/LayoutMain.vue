@@ -28,9 +28,9 @@ const handleLogout = async () => {
 					:subtitle="user.email"
 				/>
 			</v-list>
-			
+
 			<v-divider/>
-			
+
 			<v-list density="compact" nav>
 				<v-list-item
 					prepend-icon="mdi-forum"
@@ -48,7 +48,7 @@ const handleLogout = async () => {
 	</v-navigation-drawer>
 	<v-app-bar title="EchoVerse"/>
 	<v-main>
-		<v-container>
+		<v-container class="h-100">
 			<router-view/>
 		</v-container>
 	</v-main>
