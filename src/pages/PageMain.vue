@@ -59,8 +59,11 @@ onUpdated(() => {
 				<v-card
 					color="grey-lighten-3"
 					elevation="0"
-					:text="doc.message"
-				/>
+				>
+					<v-card-text class="text-pre-wrap">
+						{{ doc.message }}
+					</v-card-text>
+				</v-card>
 			</div>
 		</div>
 		<v-form @submit.prevent="sendMsg">
