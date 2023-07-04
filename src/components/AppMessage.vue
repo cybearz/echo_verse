@@ -1,8 +1,8 @@
 <script setup lang="ts">
 interface IProps {
-	author: String,
-	createdAt: String,
-	message: String,
+	author: string,
+	createdAt: string,
+	message: string,
 	isMine: boolean,
 }
 

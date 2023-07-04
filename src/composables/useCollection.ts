@@ -1,11 +1,11 @@
 import { ref } from "vue"
 import { db } from "@/firebase/config"
-import { collection as fbCollection, addDoc as fbAddDoc, onSnapshot, orderBy} from "firebase/firestore"
+import { collection as fbCollection, addDoc as fbAddDoc, onSnapshot } from "firebase/firestore"
 
 export function useCollection(collectonName) {
 	//fixme remove any
 	const documents = ref<any>([])
-	const error = ref<String | null>(null)
+	const error = ref<string | null>(null)
 
 	const collectionRef = fbCollection(db, collectonName)
 	onSnapshot(collectionRef, (snap) => {

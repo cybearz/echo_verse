@@ -46,7 +46,7 @@ onUpdated(() => {
 				:author="doc.name"
 				:createdAt="doc.createdAt"
 				:message="doc.message"
-				:isMine="doc.name === user.displayName"
+				:isMine="doc.name === user?.displayName"
 				class="mb-4"
 			/>
 		</div>
