@@ -38,7 +38,7 @@ onUpdated(() => {
 	<div class="h-100 d-flex flex-column">
 		<div
 			ref="messageArea"
-			class="overflow-y-auto h-100 pr-1"
+			class="overflow-y-auto h-100 pr-2"
 		>
 			<AppMessage
 				v-for="doc in documentsSortedAndFormatted"
@@ -46,6 +46,7 @@ onUpdated(() => {
 				:author="doc.name"
 				:createdAt="doc.createdAt"
 				:message="doc.message"
+				:isMine="doc.name === user.displayName"
 				class="mb-4"
 			/>
 		</div>
