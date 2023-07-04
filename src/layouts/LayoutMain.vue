@@ -47,7 +47,7 @@ const handleLogout = async () => {
 		</template>
 	</v-navigation-drawer>
 	<v-app-bar title="EchoVerse"/>
-	<v-main>
+	<v-main class="h-screen">
 		<v-container class="h-100">
 			<router-view/>
 		</v-container>
