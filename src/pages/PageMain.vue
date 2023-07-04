@@ -37,7 +37,7 @@ onUpdated(() => {
 	<div class="h-100 d-flex flex-column">
 		<div
 			ref="messageArea"
-			class="overflow-y-auto h-100 pr-4"
+			class="overflow-y-auto h-100 pr-1"
 		>
 			<div
 				v-for="doc in documentsSortedAndFormatted"
