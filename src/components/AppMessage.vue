@@ -12,37 +12,27 @@ defineProps<IProps>()
 
 <template>
 	<div
-		class="d-flex flex-column"
-		:class="{ 'align-end': isMine }"
+		:class="{ 'justify-end': isMine}"
+		class="d-flex mb-2"
 	>
-		<div class="d-flex align-center mb-2">
-			<v-avatar
-				size="32"
-			>
-				<v-img
-					src="https://cdn.vuetifyjs.com/images/john.jpg"
-					alt="John"
-				/>
-			</v-avatar>
-			<div class="mx-2 text-subtitle-1">{{ author }}</div>
-			<div class="text-caption">{{ createdAt }}</div>
-		</div>
+		<v-avatar v-if="!isMine">
+			<v-img
+				src="https://cdn.vuetifyjs.com/images/john.jpg"
+				alt="John"
+			/>
+		</v-avatar>
 		<v-card
-			:color="isMine ? 'blue-lighten-3' : 'grey-lighten-3'"
-			elevation="0"
-			class="message"
+			:color="isMine ? 'blue-lighten-4' : 'grey-lighten-5'"
+			class="ml-2 pa-3"
+			style="max-width: 65%"
 		>
-			<v-card-text class="text-pre-wrap">
+			<div class="d-flex align-center">
+				<span class="font-weight-medium">{{ isMine ? "Вы" : author }}</span>
+				<span class="ml-2 text-medium-emphasis text-caption">{{ createdAt }}</span>
+			</div>
+			<p class="text-high-emphasis">
 				{{ message }}
-			</v-card-text>
+			</p>
 		</v-card>
 	</div>
 </template>
-
-<style scoped>
-.message {
-	display: inline-block;
-	min-width: 15%;
-	max-width: 65%;
-}
-</style>
