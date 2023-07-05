@@ -5,6 +5,7 @@ import { collection as fbCollection, addDoc as fbAddDoc, onSnapshot } from "fire
 export function useCollection(collectonName) {
 	//fixme remove any
 	const documents = ref<any>([])
+	const loading = ref(false)
 	const error = ref<string | null>(null)
 
 	const collectionRef = fbCollection(db, collectonName)
@@ -23,18 +24,22 @@ export function useCollection(collectonName) {
 	})
 
 	const addDoc = async (doc) => {
+		loading.value = true
 		error.value = null
 
 		try {
 			fbAddDoc(collectionRef, doc)
+			loading.value = false
 		} catch (e) {
 			documents.value = null
 			error.value = e.message
+			loading.value = false
 		}
 	}
 
 	return {
 		documents,
+		loading,
 		error,
 		addDoc
 	}
