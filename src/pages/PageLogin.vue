@@ -1,21 +1,32 @@
 <script setup lang="ts">
-
 import { ref } from "vue"
 import { useRouter } from "vue-router"
 import { useLogin } from "@/composables/useLogin"
+import { ruleCorrectEmail, ruleRequired } from "@/util/rules"
 
 const email = ref("")
-const password = ref("")
+const emailRules = [
+	ruleRequired,
+	ruleCorrectEmail,
+]
 
+const password = ref("")
+const passwordRules = [
+	ruleRequired,
+]
+
+const isValid = ref(false)
 const router = useRouter()
-const { login, error } = useLogin()
+const { loading, error, login } = useLogin()
 
 const onSubmit = async () => {
+	if (!isValid.value) return //^
+
 	await login(email.value, password.value)
 	if (error.value) {
 		console.log(error.value)
 	} else {
-		router.push({ name: "PageMain" })
+		await router.push({ name: "PageMain" })
 	}
 }
 </script>
@@ -25,9 +36,14 @@ const onSubmit = async () => {
 		<v-card class="mx-auto px-6 py-8" max-width="344">
 			<v-card-title>Вход</v-card-title>
 			<v-card-text>
-				<v-form @submit.prevent="onSubmit">
+				<v-form
+					v-model="isValid"
+					validate-on="lazy blur"
+					@submit.prevent="onSubmit"
+				>
 					<v-text-field
 						v-model="email"
+						:rules="emailRules"
 						label="Email"
 						variant="underlined"
 						class="mb-2"
@@ -35,6 +51,7 @@ const onSubmit = async () => {
 
 					<v-text-field
 						v-model="password"
+						:rules="passwordRules"
 						type="password"
 						label="Пароль"
 						variant="underlined"
@@ -42,6 +59,7 @@ const onSubmit = async () => {
 					/>
 
 					<v-btn
+						:loading="loading"
 						block
 						color="primary"
 						type="submit"
